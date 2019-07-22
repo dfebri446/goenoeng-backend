@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+const helmet = require('helmet')
 
 const Joi = require('@hapi/joi')
 Joi.objectId = require('joi-objectid')(Joi)
@@ -9,6 +10,7 @@ Joi.objectId = require('joi-objectid')(Joi)
 const app = express()
 
 app.use(logger('dev'))
+app.use(helmet.xssFilter())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
